@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.orderflow.order.Phase4CIT
+-------------------------------------------------------------------------------
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 49.64 s -- in com.orderflow.order.Phase4CIT

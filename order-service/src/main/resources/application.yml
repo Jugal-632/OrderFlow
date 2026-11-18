@@ -1,0 +1,90 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: order-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/orderflow_db
+    username: ${ORDER_DB_USER:order_runtime}
+    password: ${ORDER_DB_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: order_schema
+    show-sql: false
+
+  flyway:
+    enabled: true
+    schemas: order_schema
+    default-schema: order_schema
+    table: flyway_schema_history
+    baseline-on-migrate: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      properties:
+        enable.idempotence: true
+        delivery.timeout.ms: 10000
+        request.timeout.ms: 5000
+        max.block.ms: 10000
+        linger.ms: 0
+    consumer:
+      group-id: order-service
+      enable-auto-commit: false
+      max-poll-records: 20
+      properties:
+        max.poll.interval.ms: 300000
+        allow.auto.create.topics: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+logging:
+  pattern:
+    level: '%5p [correlationId=%X{correlationId}]'
+order:
+  idempotency:
+    lock-timeout-ms: 4000
+
+jwt:
+  secret: ${JWT_SECRET:}
+  issuer: ${JWT_ISSUER:orderflow-auth}
+  audience: ${JWT_AUDIENCE:orderflow-api}
+spring.data.redis.host: ${REDIS_HOST:localhost}
+spring.data.redis.port: ${REDIS_PORT:6379}
+spring.data.redis.timeout: 2s
+spring.data.redis.connect-timeout: 2s
+server.address: ${SERVICE_BIND_ADDRESS:127.0.0.1}
+services:
+  inventory: ${INVENTORY_SERVICE_URL:http://127.0.0.1:8083}
+  notification: ${NOTIFICATION_SERVICE_URL:http://127.0.0.1:8084}
+
+observability.environment: ${APP_ENV:local}
+observability.readiness.enforce: true
+management.server.address: ${MANAGEMENT_ADDRESS:127.0.0.1}
+management.server.port: ${MANAGEMENT_PORT:9082}
+management.endpoint.health.probes.enabled: true
+management.endpoint.health.group.liveness.include: livenessState
+management.endpoint.health.group.readiness.include: '*'
+management.metrics.tags.service: ${spring.application.name}
+management.metrics.tags.environment: ${APP_ENV:local}
+management.cloudwatch.metrics.export.enabled: ${CLOUDWATCH_METRICS_ENABLED:false}
+management.cloudwatch.metrics.export.namespace: OrderFlow
+management.cloudwatch.metrics.export.step: 1m
+
+spring.http.converters.preferred-json-mapper: jackson2

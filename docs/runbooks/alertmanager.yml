@@ -1,0 +1,9 @@
+route:
+  receiver: operations
+  group_by: [alertname, service, environment]
+  group_wait: 0s
+  group_interval: 30s
+  repeat_interval: 5m
+receivers:
+  - name: operations
+    # Supply the deployment's approved receiver integration. No external notification is sent by this repository.

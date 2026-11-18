@@ -1,0 +1,16 @@
+<configuration>
+  <springProperty scope="context" name="service" source="spring.application.name" defaultValue="orderflow"/>
+  <springProperty scope="context" name="environment" source="observability.environment" defaultValue="local"/>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="com.orderflow.telemetry.SafeJsonEncoder"/>
+  </appender>
+  <springProperty scope="context" name="auditFile" source="logging.file.name" defaultValue="logs/application.jsonl"/>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${auditFile}</file>
+    <encoder class="com.orderflow.telemetry.SafeJsonEncoder"/>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${auditFile}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern><maxFileSize>20MB</maxFileSize><maxHistory>14</maxHistory><totalSizeCap>500MB</totalSizeCap>
+    </rollingPolicy>
+  </appender>
+  <root level="INFO"><appender-ref ref="CONSOLE"/><appender-ref ref="FILE"/></root>
+</configuration>

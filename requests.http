@@ -1,0 +1,57 @@
+@gateway = http://localhost:8080
+@accessToken = replace-with-login-accessToken
+@orderId = replace-with-order-id
+@idempotencyKey = create-order-001
+
+### Login (credentials injected through bootstrap environment)
+POST {{gateway}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{customerEmail}}",
+  "password": "{{customerPassword}}"
+}
+
+### Current identity
+GET {{gateway}}/auth/me
+Authorization: Bearer {{accessToken}}
+
+### Create an order; customer identity comes only from the token
+POST {{gateway}}/api/orders
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+Idempotency-Key: {{idempotencyKey}}
+
+{
+  "productId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "quantity": 2
+}
+
+### Owned orders (ADMIN sees all)
+GET {{gateway}}/api/orders?page=0&size=20
+Authorization: Bearer {{accessToken}}
+
+### Order and timeline
+GET {{gateway}}/api/orders/{{orderId}}
+Authorization: Bearer {{accessToken}}
+
+###
+GET {{gateway}}/api/orders/{{orderId}}/timeline
+Authorization: Bearer {{accessToken}}
+
+### ADMIN stock
+GET {{gateway}}/api/inventory?page=0&size=20
+Authorization: Bearer {{accessToken}}
+
+### ADMIN notification history
+GET {{gateway}}/api/notifications?orderId={{orderId}}&size=20
+Authorization: Bearer {{accessToken}}
+
+### Cancel an owned CONFIRMED order (no request body)
+POST {{gateway}}/api/orders/{{orderId}}/cancel
+Authorization: Bearer {{accessToken}}
+Idempotency-Key: cancel-order-001
+
+### Revoke this token
+POST {{gateway}}/auth/logout
+Authorization: Bearer {{accessToken}}

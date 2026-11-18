@@ -1,0 +1,28 @@
+groups:
+  - name: orderflow-recovery
+    interval: 15s
+    rules:
+      - alert: OrderFlowOutboxDelayed
+        expr: orderflow_outbox_oldest_seconds > 60
+        labels: {severity: warning}
+        annotations:
+          summary: Pending publication older than 60 seconds
+          runbook: docs/runbooks/broker-and-replay.md
+      - alert: OrderFlowOrderStuck
+        expr: orderflow_orders_stuck_seconds > 60
+        labels: {severity: warning}
+        annotations:
+          summary: PENDING or CANCEL_PENDING order older than 60 seconds
+          runbook: docs/runbooks/stuck-order.md
+      - alert: OrderFlowRecoveryOverdue
+        expr: (orderflow_outbox_oldest_seconds > 300) or (orderflow_orders_stuck_seconds > 300)
+        labels: {severity: critical}
+        annotations:
+          summary: Recovery has remained incomplete for five minutes
+          runbook: docs/runbooks/stuck-order.md
+      - alert: OrderFlowServiceUnavailable
+        expr: up{job=~"orderflow-.+"} == 0
+        for: 30s
+        labels: {severity: critical}
+        annotations:
+          summary: Internal metrics endpoint unavailable; absence is not a zero backlog

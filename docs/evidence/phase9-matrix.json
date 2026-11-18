@@ -1,0 +1,584 @@
+{
+  "generatedAt": "2026-10-28T13:32:32.572185+00:00",
+  "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+  "workspaceFingerprint": "bad20e044c0a72c5cc3fcfeba3d3b0e2523d4e64a1b8856a7e52a9bedadc82bb",
+  "sourceManifest": "phase9-source-manifest.json",
+  "verificationLogs": [
+    "phase9-verify.log",
+    "phase9-recheck.log"
+  ],
+  "result": "PASS",
+  "scenarios": [
+    {
+      "scenarioId": "T01",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Committed order survives restart and broker outage; exactly one reservation and two notifications",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:22:15.170099900Z",
+      "observed": {
+        "orderId": "d6aecb99-63db-43c7-b04a-f40d00faaff5",
+        "notifications": 2,
+        "stock": 9998
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:23:28.336427700Z"
+    },
+    {
+      "scenarioId": "T02",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:07:32.787952+00:00",
+      "endedAt": "2026-10-28T07:09:28.898952+00:00",
+      "expectedInvariant": "Distinct stock/missing-product rejection without stock change",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.44,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase4CIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T03",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:04:46.402583+00:00",
+      "endedAt": "2026-10-28T07:06:01.952583+00:00",
+      "expectedInvariant": "Duplicate reservation deducts once",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.425,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/inventory-service-TEST-com.orderflow.inventory.InventoryProcessingIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T04",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:04:46.402583+00:00",
+      "endedAt": "2026-10-28T07:06:01.952583+00:00",
+      "expectedInvariant": "Original rejection remains immutable after replenishment",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 1.106,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/inventory-service-TEST-com.orderflow.inventory.InventoryProcessingIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T05",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:04:46.402583+00:00",
+      "endedAt": "2026-10-28T07:06:01.952583+00:00",
+      "expectedInvariant": "100 orders / 50 stock yields 50 reservations and no oversell",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 5.723,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/inventory-service-TEST-com.orderflow.inventory.InventoryProcessingIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T06",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T13:05:27.844040+00:00",
+      "endedAt": "2026-10-28T13:08:02.799040+00:00",
+      "expectedInvariant": "20 identical requests create one order and one event",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.221,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase5IT.xml",
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase9SystemIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T07",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T13:05:27.844040+00:00",
+      "endedAt": "2026-10-28T13:08:02.799040+00:00",
+      "expectedInvariant": "Changed request conflicts; customer scopes remain independent",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.444,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase5IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T08",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T13:05:27.844040+00:00",
+      "endedAt": "2026-10-28T13:08:02.799040+00:00",
+      "expectedInvariant": "Pre-commit process halt leaves no order, outbox or request claim",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 35.998,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase5IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T09",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Committed order survives restart and broker outage; exactly one reservation and two notifications",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:22:15.170099900Z",
+      "observed": {
+        "orderId": "d6aecb99-63db-43c7-b04a-f40d00faaff5",
+        "notifications": 2,
+        "stock": 9998
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:23:28.375140Z"
+    },
+    {
+      "scenarioId": "T10",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:04:46.402583+00:00",
+      "endedAt": "2026-10-28T07:06:01.952583+00:00",
+      "expectedInvariant": "Post-ACK process halt republishes original event without duplicate stock effect",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 16.36,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/inventory-service-TEST-com.orderflow.inventory.InventoryProcessingIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T11",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Redelivery after committed reservation and process halt does not deduct stock twice",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:24:13.328358400Z",
+      "observed": {
+        "orderId": "802f0601-fe20-4c10-91ab-55c73ae50695",
+        "exitCode": 73,
+        "stock": 9996
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:25:47.136757900Z"
+    },
+    {
+      "scenarioId": "T12",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Committed order survives restart and broker outage; exactly one reservation and two notifications",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:22:15.170099900Z",
+      "observed": {
+        "orderId": "d6aecb99-63db-43c7-b04a-f40d00faaff5",
+        "notifications": 2,
+        "stock": 9998
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:23:28.378371700Z"
+    },
+    {
+      "scenarioId": "T13",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Offset advances only after DLT publication recovers",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:25:47.154130500Z",
+      "observed": {
+        "dltIndexed": true,
+        "sourceOffset": 0
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:25:59.909538400Z"
+    },
+    {
+      "scenarioId": "T14",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:20:44.884111+00:00",
+      "endedAt": "2026-10-28T07:21:15.343111+00:00",
+      "expectedInvariant": "Replay is audited, atomic and idempotent",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.477,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase8IT.xml",
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase8IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T15",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:20:14.463026+00:00",
+      "endedAt": "2026-10-28T07:21:02.781026+00:00",
+      "expectedInvariant": "Cancellation restores stock once despite duplicate release",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 1.44,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase7IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T16",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:20:14.463026+00:00",
+      "endedAt": "2026-10-28T07:21:02.781026+00:00",
+      "expectedInvariant": "CANCEL_PENDING persists through Inventory unavailability then completes",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 12.851,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase7IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T17",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:07:32.787952+00:00",
+      "endedAt": "2026-10-28T07:09:28.898952+00:00",
+      "expectedInvariant": "Contradictory outcome preserves terminal state and remains recoverable",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 2.349,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase4CIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T18",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:07:32.787952+00:00",
+      "endedAt": "2026-10-28T07:09:28.898952+00:00",
+      "expectedInvariant": "Out-of-order lifecycle notifications retain unique versioned history",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.213,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase4CIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T19",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:19:26.025940+00:00",
+      "endedAt": "2026-10-28T07:19:37.202940+00:00",
+      "expectedInvariant": "Foreign customer receives 404; admin scope enforced",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.883,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase6IT.xml",
+        "phase9-reports/order-service-TEST-com.orderflow.order.Phase6IT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T20",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T06:59:45.916925+00:00",
+      "endedAt": "2026-10-28T07:00:40.597925+00:00",
+      "expectedInvariant": "Expired and revoked tokens rejected",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 0.426,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/api-gateway-TEST-com.orderflow.gateway.GatewaySecurityIT.xml",
+        "phase9-reports/auth-service-TEST-com.orderflow.auth.AuthSecurityIT.xml",
+        "phase9-reports/auth-service-TEST-com.orderflow.auth.AuthSecurityIT.xml",
+        "phase9-reports/api-gateway-TEST-com.orderflow.gateway.GatewaySecurityIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T21",
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "environment": {
+        "hostMemoryBytes": 16857817088,
+        "os": "Windows 11",
+        "java": "21.0.12.1",
+        "images": [
+          "postgres:15.6",
+          "confluentinc/cp-kafka:7.4.0",
+          "redis:7.2.4-alpine"
+        ],
+        "serviceJvmProcessors": 2,
+        "serviceHeapMiB": 256,
+        "hostProcessors": 12
+      },
+      "startedAt": "2026-10-28T07:04:46.402583+00:00",
+      "endedAt": "2026-10-28T07:06:01.952583+00:00",
+      "expectedInvariant": "Fresh and populated baseline upgrades preserve application rows",
+      "observed": {
+        "assertionResult": "PASS",
+        "testDurationSeconds": 7.273,
+        "verificationWindow": "containing JUnit suite"
+      },
+      "result": "PASS",
+      "artifacts": [
+        "phase9-reports/inventory-service-TEST-com.orderflow.inventory.InventoryProcessingIT.xml"
+      ]
+    },
+    {
+      "scenarioId": "T22",
+      "environment": "isolated Testcontainers / five service JVMs",
+      "expectedInvariant": "Isolated PostgreSQL restore reconciles all rows and migration histories",
+      "artifacts": [
+        "phase9-system/"
+      ],
+      "commit": "ff48fe9d66ec6aa6166c61c1d5baf7bf0061fff9",
+      "startedAt": "2026-10-28T07:25:59.929754700Z",
+      "observed": {
+        "matchingTables": 28,
+        "database": "phase9_restored"
+      },
+      "result": "PASS",
+      "endedAt": "2026-10-28T07:26:04.880655200Z"
+    }
+  ],
+  "performanceArtifact": "phase9-system/performance.json"
+}

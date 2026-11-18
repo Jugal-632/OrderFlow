@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.orderflow.auth.AuthSecurityIT
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 27.33 s -- in com.orderflow.auth.AuthSecurityIT

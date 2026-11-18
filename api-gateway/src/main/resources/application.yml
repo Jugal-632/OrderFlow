@@ -1,42 +1,56 @@
 server:
   port: 8080
-
+  max-http-request-header-size: 16KB
+logging:
+  file:
+    name: ${GATEWAY_LOG_FILE:logs/gateway.log}
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
-      routes:
-        # Auth routes — no JWT check
-        - id: auth-service
-          uri: http://localhost:8081
-          predicates:
-            - Path=/auth/**
-
-        # Order routes — JWT required
-        - id: order-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/api/orders/**
-          filters:
-            - name: JwtAuthFilter
-
-        # Inventory routes — JWT required
-        - id: inventory-service
-          uri: http://localhost:8083
-          predicates:
-            - Path=/api/inventory/**
-          filters:
-            - name: JwtAuthFilter
-
-      default-filters:
-        - name: CorrelationIdFilter
-
+      server:
+        webflux:
+          httpclient:
+            connect-timeout: 2000
+            response-timeout: 10s
+  codec:
+    max-in-memory-size: 64KB
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2s
+      connect-timeout: 2s
 jwt:
-  secret: ${JWT_SECRET}
-
+  secret: ${JWT_SECRET:}
+  issuer: ${JWT_ISSUER:orderflow-auth}
+  audience: ${JWT_AUDIENCE:orderflow-api}
+services:
+  auth: ${AUTH_SERVICE_URL:http://auth-service:8081}
+  order: ${ORDER_SERVICE_URL:http://order-service:8082}
+  inventory: ${INVENTORY_SERVICE_URL:http://inventory-service:8083}
+  notification: ${NOTIFICATION_SERVICE_URL:http://notification-service:8084}
+gateway:
+  cors:
+    origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:5173}
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,prometheus
+
+observability.environment: ${APP_ENV:local}
+observability.readiness.enforce: true
+management.server.address: ${MANAGEMENT_ADDRESS:127.0.0.1}
+management.server.port: ${MANAGEMENT_PORT:9080}
+management.endpoint.health.probes.enabled: true
+management.endpoint.health.group.liveness.include: livenessState
+management.endpoint.health.group.readiness.include: '*'
+management.metrics.tags.service: ${spring.application.name}
+management.metrics.tags.environment: ${APP_ENV:local}
+management.cloudwatch.metrics.export.enabled: ${CLOUDWATCH_METRICS_ENABLED:false}
+management.cloudwatch.metrics.export.namespace: OrderFlow
+management.cloudwatch.metrics.export.step: 1m
+
+spring.http.converters.preferred-json-mapper: jackson2

@@ -1,0 +1,12 @@
+{
+  "verifiedAtUtc": "2026-10-24T18:55:27.4373790Z",
+  "loginStatus": 200,
+  "createOrderStatus": 201,
+  "orderId": "e13cbb54-ca96-4504-b51a-7d702e4b13a1",
+  "eventId": "91d82b15-b3e0-4f9a-a85a-3aa1ebf74401",
+  "correlationId": "16113378-0256-4ed7-9546-bbc132d4c8af",
+  "httpToOutboxToKafka": "PASS",
+  "kafkaRecords": [
+    "X-Correlation-Id:16113378-0256-4ed7-9546-bbc132d4c8af,eventId:91d82b15-b3e0-4f9a-a85a-3aa1ebf74401,eventType:order.placed,schemaVersion:1\t{\"data\": {\"orderId\": \"e13cbb54-ca96-4504-b51a-7d702e4b13a1\", \"quantity\": 2, \"productId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\", \"customerId\": \"11111111-1111-1111-1111-111111111111\"}, \"eventId\": \"91d82b15-b3e0-4f9a-a85a-3aa1ebf74401\", \"producer\": \"order-service\", \"eventType\": \"order.placed\", \"occurredAt\": \"2026-10-24T18:55:11.811615100Z\", \"aggregateId\": \"e13cbb54-ca96-4504-b51a-7d702e4b13a1\", \"causationId\": \"2f140e77-e523-4e0c-92ca-e3b6b3d81de3\", \"correlationId\": \"16113378-0256-4ed7-9546-bbc132d4c8af\", \"schemaVersion\": 1, \"aggregateVersion\": 1}"
+  ]
+}

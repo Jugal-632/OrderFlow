@@ -37,3 +37,33 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+
+.env
+**/logs/
+**/node_modules/
+frontend/test-results/
+frontend/playwright-report/
+*.env
+target/
+.idea/
+*.iml
+
+# Private runtime configuration and generated development artifacts
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+*.log
+/docs/evidence/*.zip
+/OrderFlow_ImplementationPlan*.md
+
+# Private release preparation and detailed generated evidence
+/docs/public-release-*
+/docs/phase10-remaining-work.md
+/docs/evidence/phase10/
+
+# Raw execution traces (summaries remain publishable)
+/docs/evidence/**/*.jsonl
+/docs/evidence/phase9-system/
+/docs/evidence/*progress*.md
